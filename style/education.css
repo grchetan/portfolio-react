@@ -1,0 +1,272 @@
+/* ---------- Background & Base ---------- */
+.edu-body {
+  background: linear-gradient(135deg, #fef9f3, #faf7f2);
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.1),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 177, 153, 0.1),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(120, 200, 200, 0.1),
+      transparent 50%
+    );
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 40px 20px;
+  position: relative;
+  font-family: "Kalam", cursive;
+}
+
+/* Paper grid pattern */
+.edu-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 35px,
+      rgba(0, 0, 0, 0.02) 35px,
+      rgba(0, 0, 0, 0.02) 36px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 35px,
+      rgba(0, 0, 0, 0.02) 35px,
+      rgba(0, 0, 0, 0.02) 36px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.relative-container {
+  position: relative;
+  z-index: 5;
+  max-width: 850px;
+  margin: auto;
+}
+
+/* ---------- Title ---------- */
+.sketch-title {
+  font-size: 4rem;
+  text-align: center;
+  color: #2d3748;
+  transform: rotate(-2deg);
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.title-wrapper {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.title-marker {
+  width: 300px;
+  height: 80px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  top: -20px;
+}
+
+/* ---------- Marker Highlights ---------- */
+.marker-highlight {
+  position: absolute;
+  border-radius: 50% 30% 60% 40%;
+  opacity: 0.7;
+  animation: float 6s infinite;
+}
+
+.marker-yellow {
+  background: linear-gradient(45deg, #ffd93d, #ffed4a);
+}
+
+.marker-blue {
+  background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+}
+
+.marker-pink {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+}
+
+.marker-green {
+  background: linear-gradient(45deg, #c7f464, #a8e6cf);
+}
+
+/* ---------- Timeline Layout ---------- */
+.timeline-wrapper {
+  position: relative;
+  padding-left: 50px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #4a5568;
+  animation: shake 10s infinite;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -9px;
+  top: 18px;
+  width: 18px;
+  height: 18px;
+  background: #4a5568;
+  border-radius: 50%;
+}
+
+.timeline-dot-primary {
+  background: #57b5e7 !important;
+}
+
+/* ---------- Cards ---------- */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.edu-item {
+  position: relative;
+  margin-left: 30px;
+}
+
+.sketch-card {
+  background: white;
+  border: 3px solid #4a5568;
+  padding: 30px;
+  border-radius: 20px 25px 30px 22px;
+  position: relative;
+  transform: rotate(1deg);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: cardFloat 8s infinite;
+}
+
+.sketch-card-primary {
+  border-color: #57b5e7;
+}
+
+.primary-text {
+  color: #57b5e7;
+}
+
+/* ---------- Card Content ---------- */
+.institution-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.degree-text {
+  font-size: 1.3rem;
+  margin-top: 5px;
+  color: #4a5568;
+}
+
+.location-text {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #718096;
+}
+
+.year-text {
+  border: 2px solid #4a5568;
+  padding: 3px 8px;
+  display: inline-block;
+  border-radius: 10px;
+  transform: rotate(-1deg);
+}
+
+.year-primary {
+  border-color: #57b5e7 !important;
+  background: #57b5e7;
+  color: white;
+}
+
+/* CURRENT badge */
+.current-badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: #57b5e7;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 12px;
+  transform: rotate(-10deg);
+  font-size: 0.9rem;
+}
+
+/* Card doodles (positions maintained) */
+.card-d1 {
+  top: -30px;
+  right: 10px;
+}
+.card-d2 {
+  bottom: -20px;
+  left: -20px;
+}
+.card-d3 {
+  top: -10px;
+  right: -40px;
+}
+.card-d4 {
+  bottom: -20px;
+  right: 20px;
+}
+.card-d5 {
+  top: -30px;
+  left: -10px;
+}
+.card-d6 {
+  bottom: -10px;
+  right: 0px;
+}
+.card-d7 {
+  top: -30px;
+  left: -20px;
+}
+.card-d8 {
+  bottom: -10px;
+  right: 10px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sketchbook — Chetan's Portfolio</title>
+    <!-- Fonts: handwritten / marker style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Reenie+Beanie&family=Kalam:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f6efe6;
+        --ink: #222222;
+        --marker-pink: #ffd6e0;
+        --marker-blue: #d7f0ff;
+        --marker-yellow: #fff1c9;
+        --pastel-1: #ffb3c6;
+        --pastel-2: #bfe9ff;
+        --pastel-3: #fff0b8;
+        --shadow: rgba(16, 16, 16, 0.08);
+      }
+
+      /* Reset */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: "Patrick Hand", system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: var(--ink);
+        line-height: 1.3;
+        padding: 40px 24px;
+      }
+
+      /* Paper texture using subtle repeating svg background */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        background-image: radial-gradient(
+          rgba(0, 0, 0, 0.02) 0.5px,
+          transparent 0.5px
+        );
+        background-size: 6px 6px;
+        opacity: 0.6;
+        mix-blend-mode: multiply;
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.6),
+          rgba(255, 255, 255, 0.4)
+        );
+        border-radius: 18px;
+        padding: 40px;
+        box-shadow: 0 10px 30px var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Rough hand-drawn frame */
+      .frame {
+        position: absolute;
+        inset: 18px;
+        pointer-events: none;
+      }
+      .frame svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      header {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* marker buttons */
+      .nav {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .nav button {
+        background: transparent;
+        border: 2px solid rgba(0, 0, 0, 0.08);
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-family: "Kalam", "Patrick Hand";
+        cursor: pointer;
+        box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.06);
+      }
+      .nav button:hover {
+        transform: translateY(-2px) rotate(-1deg);
+      }
+
+      h1.title {
+        font-size: 36px;
+        margin: 6px 0 0;
+        letter-spacing: 1px;
+        font-weight: 700;
+      }
+      p.subtitle {
+        margin: 6px 0 0;
+        font-size: 15px;
+        color: #444;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 30px;
+        margin-top: 28px;
+      }
+
+      /* Left column sections look like sketched cards */
+      .card {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        padding: 18px;
+        position: relative;
+        box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.03);
+        border: 1px dashed rgba(0, 0, 0, 0.06);
+        margin-bottom: 20px;
+      }
+
+      /* Handwritten small heading with little doodle */
+      .card h3 {
+        font-family: "Reenie Beanie", "Patrick Hand";
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+
+      /* Minimal typed labels */
+      .muted {
+        font-size: 13px;
+        color: #666;
+      }
+
+      /* Blobs & doodles */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(8px);
+        opacity: 0.95;
+      }
+
+      /* Marker highlight inside headings */
+      .marker {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 8px;
+        transform: skewX(-6deg) rotate(-2deg);
+      }
+
+      /* Skills list as scribbled tags */
+      .skills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .skill {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.6),
+          rgba(255, 255, 255, 0.4)
+        );
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        font-size: 13px;
+        box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.04);
+      }
+
+      /* Project cards with sketch outlines */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .project {
+        height: 140px;
+        position: relative;
+        padding: 12px;
+        overflow: hidden;
+      }
+      .project .sketch-frame {
+        position: absolute;
+        inset: 0;
+        opacity: 0.9;
+      }
+      .project p {
+        margin: 0;
+        font-size: 13px;
+      }
+
+      /* Contact form simplified */
+      .contact-row {
+        display: flex;
+        gap: 8px;
+      }
+      .contact-row input,
+      .contact-row textarea {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px dashed rgba(0, 0, 0, 0.08);
+        font-family: inherit;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 14px;
+        background: linear-gradient(90deg, var(--pastel-1), var(--pastel-2));
+        border: 2px solid rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        font-family: "Kalam";
+      }
+
+      footer {
+        margin-top: 24px;
+        text-align: right;
+        font-size: 13px;
+      }
+
+      /* Slow organic hand-drawn animations */
+      @keyframes float-y {
+        0% {
+          transform: translateY(0) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(-8px) rotate(1deg);
+        }
+        100% {
+          transform: translateY(0) rotate(-1deg);
+        }
+      }
+      @keyframes jelly {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes scribble-line {
+        0% {
+          stroke-dashoffset: 400;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .float {
+        animation: float-y 6s ease-in-out infinite;
+      }
+      .slow-jelly {
+        animation: jelly 5.8s ease-in-out infinite;
+      }
+
+      /* small responsive */
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* tiny handwritten underline */
+      .hand-underline {
+        display: inline-block;
+        position: relative;
+      }
+      .hand-underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--marker-yellow),
+          var(--marker-pink)
+        );
+        border-radius: 6px;
+        transform: skewX(-6deg);
+        z-index: -1;
+      }
+
+      /* rough ink stroke using SVG overlay for project frames */
+    </style>
+  </head>
+  <body>
+    <div class="page" role="main">
+      <!-- sketchy frame lines -->
+      <div class="frame" aria-hidden="true">
+        <svg
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            stroke="rgba(0,0,0,0.08)"
+            stroke-width="3"
+            fill="none"
+            stroke-linecap="round"
+          >
+            <path d="M20 20 C200 40, 1000 0, 1180 30" stroke-dasharray="6 8" />
+            <path
+              d="M20 780 C200 740, 1000 780, 1180 770"
+              stroke-dasharray="6 10"
+            />
+            <path d="M20 20 L30 60 L20 100" transform="translate(0,40)" />
+          </g>
+        </svg>
+      </div>
+
+      <header>
+        <div>
+          <div style="display: flex; gap: 12px; align-items: center">
+            <div
+              style="
+                width: 62px;
+                height: 62px;
+                border-radius: 12px;
+                background: linear-gradient(
+                  180deg,
+                  var(--pastel-2),
+                  var(--pastel-1)
+                );
+                box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.06);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 18px;
+              "
+            >
+              CP
+            </div>
+            <div>
+              <h1 class="title">
+                HELLO — I’m <span class="hand-underline">Chetan</span>
+              </h1>
+              <p class="subtitle">web developer — messy creative studio</p>
+            </div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <button
+            onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"
+          >
+            Projects
+          </button>
+          <button
+            onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+          >
+            Contact
+          </button>
+        </nav>
+      </header>
+
+      <main class="layout">
+        <section>
+          <!-- Hero card -->
+          <div class="card" style="min-height: 180px; overflow: visible">
+            <div style="display: flex; gap: 18px; align-items: flex-start">
+              <div style="flex: 1">
+                <h3 style="font-size: 26px; margin-bottom: 6px">
+                  Hand-sketched portfolio
+                </h3>
+                <p class="muted">
+                  A playful, paper-first look. Minimal text — visual-first.
+                </p>
+                <div
+                  style="
+                    margin-top: 12px;
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                  "
+                >
+                  <div class="marker" style="background: var(--marker-yellow)">
+                    designer
+                  </div>
+                  <div class="marker" style="background: var(--marker-blue)">
+                    developer
+                  </div>
+                  <div class="marker" style="background: var(--marker-pink)">
+                    illustrator
+                  </div>
+                </div>
+              </div>
+              <!-- small portrait-scribble -->
+              <div style="width: 100px; height: 100px; position: relative">
+                <svg
+                  viewBox="0 0 120 120"
+                  style="width: 100%; height: 100%"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <filter id="grain">
+                      <feTurbulence
+                        baseFrequency="0.9"
+                        numOctaves="2"
+                        stitchTiles="stitch"
+                      />
+                    </filter>
+                  </defs>
+                  <circle
+                    cx="60"
+                    cy="50"
+                    r="32"
+                    fill="white"
+                    stroke="rgba(0,0,0,0.12)"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M34 82 q26 -14 52 0"
+                    stroke="rgba(0,0,0,0.14)"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="18"
+                    y="88"
+                    width="84"
+                    height="6"
+                    rx="3"
+                    fill="rgba(0,0,0,0.02)"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <!-- floating pastel blob -->
+            <div
+              class="blob float"
+              style="
+                width: 160px;
+                height: 160px;
+                right: 16px;
+                top: -40px;
+                background: var(--pastel-1);
+                mix-blend-mode: multiply;
+                opacity: 0.9;
+                filter: blur(12px);
+              "
+            ></div>
+          </div>
+
+          <!-- About -->
+          <div class="card">
+            <h3>About</h3>
+            <p class="muted">
+              I make websites that look like they were designed on a
+              coffee-stained sketchbook. Focus on front-end, experiments, and
+              small delightful interactions.
+            </p>
+            <ul style="margin-top: 10px; padding-left: 18px">
+              <li style="margin: 6px 0">Creative problem solving</li>
+              <li style="margin: 6px 0">HTML • CSS • JavaScript</li>
+              <li style="margin: 6px 0">Design systems with personality</li>
+            </ul>
+          </div>
+
+          <!-- Education -->
+          <div class="card">
+            <h3>Education</h3>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 8px;
+              "
+            >
+              <div
+                style="
+                  border-left: 3px dashed rgba(0, 0, 0, 0.06);
+                  padding-left: 10px;
+                "
+              >
+                <strong>KIS — Secondary Education (X, CBSE)</strong>
+                <div class="muted">
+                  Keshav International School, Jhabua, Madhya Pradesh
+                </div>
+                <div class="muted">2020 — 2021</div>
+              </div>
+
+              <div
+                style="
+                  border-left: 3px dashed rgba(0, 0, 0, 0.06);
+                  padding-left: 10px;
+                "
+              >
+                <strong>Rebenok Infotech — Computer Institute</strong>
+                <div class="muted">Rebenok Infotech, Mumbai, Maharashtra</div>
+                <div class="muted">2021 — 2022</div>
+              </div>
+
+              <div
+                style="
+                  border-left: 3px dashed rgba(0, 0, 0, 0.06);
+                  padding-left: 10px;
+                "
+              >
+                <strong>KIS — Senior Secondary (XII, CBSE)</strong>
+                <div class="muted">
+                  Keshav International School, Jhabua, Madhya Pradesh
+                </div>
+                <div class="muted">2023 — 2024</div>
+              </div>
+
+              <div
+                style="
+                  border-left: 3px dashed rgba(0, 0, 0, 0.06);
+                  padding-left: 10px;
+                "
+              >
+                <strong>Sage University — BCA (Cybersecurity)</strong>
+                <div class="muted">Sage University, Indore, Madhya Pradesh</div>
+                <div class="muted">2024 — Present</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div id="projects" class="card">
+            <h3>Projects</h3>
+            <div class="projects-grid" style="margin-top: 10px">
+              <article class="project">
+                <svg
+                  class="sketch-frame"
+                  viewBox="0 0 300 160"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="6"
+                    y="6"
+                    width="288"
+                    height="148"
+                    rx="10"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.08)"
+                    stroke-width="3"
+                    stroke-dasharray="6 5"
+                  />
+                  <path
+                    d="M18 34 q60 -20 120 0 q60 20 120 0"
+                    stroke="rgba(0,0,0,0.06)"
+                    fill="none"
+                    stroke-width="2"
+                  />
+                </svg>
+                <p style="position: relative; z-index: 2">
+                  Portfolio grid — handcrafted thumbnails and playful hover
+                  reveals.
+                </p>
+              </article>
+
+              <article class="project slow-jelly">
+                <svg
+                  class="sketch-frame"
+                  viewBox="0 0 300 160"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="6"
+                    y="6"
+                    width="288"
+                    height="148"
+                    rx="10"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.08)"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M20 50 q80 -30 160 0"
+                    stroke="rgba(0,0,0,0.06)"
+                    fill="none"
+                    stroke-width="2"
+                    stroke-dasharray="4 6"
+                  />
+                </svg>
+                <p style="position: relative; z-index: 2">
+                  Interactive CV — sections that look like tear-out cards.
+                </p>
+              </article>
+
+              <article class="project">
+                <svg
+                  class="sketch-frame"
+                  viewBox="0 0 300 160"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="6"
+                    y="6"
+                    width="288"
+                    height="148"
+                    rx="10"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.08)"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M30 80 q60 -30 120 0 q60 30 120 0"
+                    stroke="rgba(0,0,0,0.06)"
+                    fill="none"
+                    stroke-width="2"
+                  />
+                </svg>
+                <p style="position: relative; z-index: 2">
+                  Mini-game UI — playful trackers and sketch-like HUD.
+                </p>
+              </article>
+
+              <article class="project slow-jelly">
+                <svg
+                  class="sketch-frame"
+                  viewBox="0 0 300 160"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="6"
+                    y="6"
+                    width="288"
+                    height="148"
+                    rx="10"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.08)"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M18 40 q120 -50 264 12"
+                    stroke="rgba(0,0,0,0.06)"
+                    fill="none"
+                    stroke-width="2"
+                    stroke-dasharray="3 5"
+                  />
+                </svg>
+                <p style="position: relative; z-index: 2">
+                  Experimental clock — hand-drawn digits and animated ink.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right column -->
+        <aside>
+          <div class="card">
+            <h3>Skills</h3>
+            <div class="skills" style="margin-top: 8px">
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">React</span>
+              <span class="skill">Canvas</span>
+              <span class="skill">Figma</span>
+            </div>
+
+            <div style="margin-top: 12px">
+              <h3 style="font-size: 16px; margin-bottom: 6px">Quick notes</h3>
+              <p class="muted">
+                I prefer 12‑hour clocks, messy outlines, and slow animations
+                that feel like breathing.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Contact</h3>
+            <form
+              id="contact"
+              onsubmit="event.preventDefault(); alert('Thanks — message sent (mock)');"
+              aria-label="Contact form"
+            >
+              <div style="display: flex; gap: 8px; margin-bottom: 8px">
+                <input name="name" placeholder="Your name" required />
+                <input name="email" placeholder="Email" required />
+              </div>
+              <textarea
+                name="message"
+                placeholder="Say hi"
+                rows="4"
+                style="width: 100%; margin-bottom: 8px"
+              ></textarea>
+              <div style="display: flex; justify-content: flex-end">
+                <button class="btn" type="submit">Send</button>
+              </div>
+            </form>
+          </div>
+
+          <div
+            class="card"
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              justify-content: center;
+              padding: 18px;
+            "
+          >
+            <div style="font-size: 12px; color: #666">Share</div>
+            <div style="display: flex; gap: 8px">
+              <button
+                aria-label="Instagram"
+                class="btn"
+                style="padding: 8px 10px"
+              >
+                IG
+              </button>
+              <button aria-label="Github" class="btn" style="padding: 8px 10px">
+                GH
+              </button>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div style="font-size: 12px; color: #666">
+            Made with pencil, marker & a lot of coffee ☕
+          </div>
+          <div style="font-size: 12px; color: #666">
+            © <strong>Chetan</strong>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // small helper to add subtle random scribbles periodically
+      function addTinyScribble() {
+        const el = document.createElement("div");
+        const size = 56 + Math.random() * 90;
+        el.style.position = "fixed";
+        el.style.left = 20 + Math.random() * 80 + "%";
+        el.style.top = 20 + Math.random() * 60 + "%";
+        el.style.width = size + "px";
+        el.style.height = size + "px";
+        el.style.pointerEvents = "none";
+        el.style.opacity = 0.06 + Math.random() * 0.12;
+        el.style.background =
+          "radial-gradient(circle at 40% 30%, rgba(0,0,0,0.06), transparent 40%)";
+        el.style.borderRadius = "50%";
+        el.style.transform = `rotate(${(Math.random() - 0.5) * 40}deg)`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 4200 + Math.random() * 8000);
+      }
+      setInterval(addTinyScribble, 4000);
+
+      // keyboard shortcut: press 'g' to toggle a faux grid of sketch lines
+      let gridOn = false;
+      document.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "g") {
+          gridOn = !gridOn;
+          document.body.style.background = gridOn
+            ? "linear-gradient(180deg,#f9f2e9,#f6efe6)"
+            : "var(--paper)";
+        }
+      });
+    </script>
+  </body>
+</html>

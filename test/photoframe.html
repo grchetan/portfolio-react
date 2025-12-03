@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        position: relative;
+        width: 500px;
+        margin: 40px auto;
+      }
+
+      .image-box {
+        background: white;
+        padding: 20px;
+        border: 3px dashed rgba(0, 0, 0, 0.2);
+        transform: rotate(-2deg);
+        border-radius: 12px;
+        box-shadow: 6px 8px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      .image-box img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 8px;
+      }
+
+      /* Floating pastel blobs */
+      .blob {
+        position: absolute;
+        opacity: 0.6;
+        animation: float 5s infinite ease-in-out;
+      }
+
+      .blob-yellow {
+        width: 70px;
+        height: 70px;
+        top: -20px;
+        right: -20px;
+        background: #fde68a;
+        border-radius: 50%;
+      }
+
+      .blob-pink {
+        width: 50px;
+        height: 50px;
+        bottom: -30px;
+        left: -30px;
+        background: #fbcfe8;
+        transform: rotate(45deg);
+      }
+
+      .blob-blue {
+        width: 35px;
+        height: 35px;
+        top: 35%;
+        right: -30px;
+        background: #bfdbfe;
+        border-radius: 50%;
+      }
+
+      /* floating animation */
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="image-box">
+        <img
+          src="https://readdy.ai/api/search-image?query=creative%20workspace%20desk%20setup%20with%20sketches%2C%20design%20tools%2C%20coffee%20cup%2C%20plants%2C%20artistic%20materials%2C%20hand%20drawn%20style%20illustration%2C%20cozy%20creative%20environment%2C%20pastel%20colors%2C%20inspiring%20atmosphere&width=500&height=400&seq=workspace&orientation=landscape"
+          alt="Creative Workspace"
+        />
+      </div>
+
+      <!-- floating doodles -->
+      <div class="blob blob-yellow"></div>
+      <div class="blob blob-pink"></div>
+      <div class="blob blob-blue"></div>
+    </div>
+  </body>
+</html>
