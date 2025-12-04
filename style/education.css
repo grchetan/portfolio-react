@@ -23,7 +23,7 @@
   font-family: "Kalam", cursive;
 }
 
-/* Paper grid pattern */
+/* Paper grid pattern
 .edu-body::before {
   content: "";
   position: fixed;
@@ -44,7 +44,7 @@
     );
   pointer-events: none;
   z-index: 1;
-}
+} */
 
 .relative-container {
   position: relative;

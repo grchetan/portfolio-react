@@ -2,30 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-
-    <!-- Pencil fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Shadows+Into+Light&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@500;700;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Fonts: handwritten / marker style -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Reenie+Beanie&family=Kalam:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <title>Canvas Cursor</title>
     <style>
       * {
         box-sizing: border-box;
@@ -36,6 +14,7 @@
       body {
         min-height: 100vh;
         background: #f0f0f0; /* For visibility */
+        overflow: hidden;
       }
 
       .cursor-trail {
@@ -49,8 +28,6 @@
     </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
     <canvas id="canvas" class="cursor-trail"></canvas>
     <script>
       const E = {
