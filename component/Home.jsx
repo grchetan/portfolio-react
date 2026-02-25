@@ -1,6 +1,18 @@
 // import { Link } from "react-router-dom";
-import "../style/style.css";
-import photo from "../src/assets/photo.png";
+import '../style/style.css';
+import '../style/responsive.css';
+import photo from '../src/assets/photo.png';
+import html_logo from '../src/assets/logos/html.png';
+import css_logo from '../src/assets/logos/css.webp';
+import react_logo from '../src/assets/logos/React.png';
+import js_logo from '../src/assets/logos/html.png';
+import node_logo from '../src/assets/logos/Node.js.png';
+import python_logo from '../src/assets/logos/python.webp';
+import c_logo from '../src/assets/logos/c.webp';
+import mysql_logo from '../src/assets/logos/mysql.webp';
+import java_logo from '../src/assets/logos/java-logo.png';
+import express_logo from '../src/assets/logos/express-js.png';
+import github_logo from '../src/assets/logos/github-logo.png';
 
 function Home() {
   return (
@@ -159,29 +171,58 @@ function Home() {
         </div>
       </section>
 
-      <div className="skills">
+      <div className="skills-container">
         <div>
           <h2 className="head">Skills</h2>
         </div>
 
         <div className="skills-list">
-          <div className="skill" style={{ "--r": "-4deg" }}>
+          <div className="skill" style={{ '--r': '-4deg' }}>
+            <img src={html_logo} alt="" />
             HTML5
           </div>
-          <div className="skill" style={{ "--r": "3deg" }}>
+          <div className="skill" style={{ '--r': '3deg' }}>
+            <img src={css_logo} alt="" />
             CSS3
           </div>
-          <div className="skill" style={{ "--r": "-2deg" }}>
+          <div className="skill" style={{ '--r': '-2deg' }}>
+            <img src={js_logo} alt="" />
             Javascript
           </div>
-          <div className="skill" style={{ "--r": "5deg" }}>
+          <div className="skill" style={{ '--r': '5deg' }}>
+            <img src={react_logo} alt="" />
             React
           </div>
-          <div className="skill" style={{ "--r": "-3deg" }}>
-            Programming C
+          <div className="skill" style={{ '--r': '-3deg' }}>
+            <img src={mysql_logo} alt="" />
+            MySql
           </div>
-          <div className="skill" style={{ "--r": "4deg" }}>
-            Coffee making
+          <div className="skill" style={{ '--r': '4deg' }}>
+            <img src={python_logo} alt="" />
+            Python
+          </div>
+          <div className="skill" style={{ '--r': '4deg' }}>
+            <img src={node_logo} alt="" />
+            Node.js
+          </div>
+          <div className="skill" style={{ '--r': '4deg' }}>
+            <img src={java_logo} alt="" />
+            Java
+          </div>
+
+          {/* new skills add */}
+          <div className="skill" style={{ '--r': '-4deg' }}>
+            <img src={express_logo} alt="" />
+            Express.js
+          </div>
+          <div className="skill" style={{ '--r': '-4deg' }}>
+            <img src={c_logo} alt="" />
+            Basic C
+          </div>
+
+          <div className="skill" style={{ '--r': '4deg' }}>
+            <img src={github_logo} alt="" />
+            Git & GitHub
           </div>
         </div>
       </div>

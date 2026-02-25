@@ -1,0 +1,67 @@
+.cp-projects-section {
+  padding: 60px 80px;
+}
+
+.cp-main-heading {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.cp-sub-heading {
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.cp-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.cp-project-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.cp-project-card:hover {
+  transform: translateY(-8px);
+}
+
+.cp-project-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.cp-project-desc {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.cp-tech-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.cp-tech-pill {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f1f1f1;
+}
+
+.cp-btn-primary {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #a6e7ff, #caa7ff);
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+}

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Reenie+Beanie&family=Kalam:wght@400;700&display=swap');
+
+
 /* ---------- Background & Base ---------- */
 .edu-body {
   background: linear-gradient(135deg, #fef9f3, #faf7f2);
@@ -54,6 +57,11 @@
 }
 
 /* ---------- Title ---------- */
+.head {
+  font-family: var(--font-kalam);
+  font-size: var(--laptop--head);
+  text-align: center;
+}
 .sketch-title {
   font-size: 4rem;
   text-align: center;
@@ -68,25 +76,12 @@
   position: relative;
 }
 
-.title-marker {
-  width: 300px;
-  height: 80px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  top: -20px;
-}
+
 
 /* ---------- Marker Highlights ---------- */
-.marker-highlight {
-  position: absolute;
-  border-radius: 50% 30% 60% 40%;
-  opacity: 0.7;
-  animation: float 6s infinite;
-}
 
-.marker-yellow {
-  background: linear-gradient(45deg, #ffd93d, #ffed4a);
-}
+
+
 
 .marker-blue {
   background: linear-gradient(45deg, #a8e6cf, #88d8c0);

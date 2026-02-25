@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Word Counter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: #f5f5f5;
+        color: #333;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      /* Sticky top bar */
+      .stats-bar {
+        position: sticky;
+        top: 0;
+        background: #ffffff;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid #ddd;
+        z-index: 10;
+      }
+
+      .stats-bar button {
+        cursor: pointer;
+      }
+
+      /* Main layout */
+      .container {
+        padding: 15px;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      textarea {
+        width: 100%;
+        height: 250px;
+        padding: 15px;
+        font-size: 16px;
+        resize: vertical;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      /* Buttons */
+      .buttons {
+        margin: 10px 0;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        padding: 8px 12px;
+        border: none;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      /* Word frequency */
+      .frequency {
+        margin-top: 15px;
+      }
+
+      .frequency ul {
+        list-style: none;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      .frequency li {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      /* Dark mode */
+      body.dark {
+        background: #121212;
+        color: #f1f1f1;
+      }
+
+      body.dark textarea {
+        background: #1e1e1e;
+        color: #fff;
+        border-color: #444;
+      }
+
+      body.dark .stats-bar {
+        background: #1e1e1e;
+        border-color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Sticky Stats Bar -->
+    <header class="stats-bar">
+      <div>Words: <span id="wordCount">0</span></div>
+      <div>Characters: <span id="charCount">0</span></div>
+      <div>Characters (no spaces): <span id="charNoSpace">0</span></div>
+      <button id="darkModeBtn">🌙</button>
+    </header>
+
+    <!-- Main Editor -->
+    <main class="container">
+      <textarea id="editor" placeholder="Start typing here..."></textarea>
+
+      <!-- Action Buttons -->
+      <div class="buttons">
+        <button onclick="clearText()">Clear</button>
+        <button onclick="copyText()">Copy</button>
+        <button onclick="downloadText()">Download .txt</button>
+      </div>
+
+      <!-- Word Frequency -->
+      <section class="frequency">
+        <h3>Repeated Words</h3>
+        <ul id="wordList"></ul>
+      </section>
+    </main>
+
+    <script>
+      const editor = document.getElementById("editor");
+      const wordCountEl = document.getElementById("wordCount");
+      const charCountEl = document.getElementById("charCount");
+      const charNoSpaceEl = document.getElementById("charNoSpace");
+      const wordList = document.getElementById("wordList");
+      const darkModeBtn = document.getElementById("darkModeBtn");
+
+      editor.addEventListener("input", updateStats);
+
+      // Update all counts live
+      function updateStats() {
+        const text = editor.value;
+
+        // Character counts
+        charCountEl.textContent = text.length;
+        charNoSpaceEl.textContent = text.replace(/\s/g, "").length;
+
+        // Clean text (remove punctuation, extra spaces)
+        const words = text
+          .toLowerCase()
+          .replace(/[^\w\s]/g, "")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+        // Word count
+        wordCountEl.textContent = words.length;
+
+        // Word frequency
+        const frequency = {};
+        words.forEach((word) => {
+          frequency[word] = (frequency[word] || 0) + 1;
+        });
+
+        // Sort by highest count
+        const sortedWords = Object.entries(frequency).sort(
+          (a, b) => b[1] - a[1]
+        );
+
+        // Display
+        wordList.innerHTML = "";
+        sortedWords.forEach(([word, count]) => {
+          if (count > 1) {
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${word}</span><strong>${count}</strong>`;
+            wordList.appendChild(li);
+          }
+        });
+      }
+
+      // Extra features
+      function clearText() {
+        editor.value = "";
+        updateStats();
+      }
+
+      function copyText() {
+        navigator.clipboard.writeText(editor.value);
+        alert("Text copied!");
+      }
+
+      function downloadText() {
+        const blob = new Blob([editor.value], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "notepad-text.txt";
+        link.click();
+      }
+
+      // Dark mode toggle
+      darkModeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        darkModeBtn.textContent = document.body.classList.contains("dark")
+          ? "☀️"
+          : "🌙";
+      });
+    </script>
+  </body>
+</html>

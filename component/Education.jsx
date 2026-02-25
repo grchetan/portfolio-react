@@ -1,13 +1,12 @@
-import React from "react";
-import "../style/education.css";
+import React from 'react';
+import '../style/education.css';
 
 export default function Education() {
   return (
     <div className="edu-body">
       <div className="relative-container">
         <div className="title-wrapper">
-          <div className="marker-highlight marker-yellow title-marker"></div>
-          <h1 className="sketch-title">Education</h1>
+          <h1 className="head">Education</h1>
         </div>
 
         <div className="timeline-wrapper">
