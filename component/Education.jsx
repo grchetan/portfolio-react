@@ -1,5 +1,7 @@
 import React from 'react';
 import '../style/education.css';
+import '../style/style.css';
+import '../style/responsive.css';
 
 export default function Education() {
   return (

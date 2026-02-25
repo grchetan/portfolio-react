@@ -1,5 +1,7 @@
 import React from 'react';
 import '../style/ProjectsSection.css';
+import '../style/style.css';
+import '../style/responsive.css';
 
 const projects = [
   {
@@ -63,7 +65,7 @@ const projects = [
 export default function Projects() {
   return (
     <section className="cp-projects-section" id="projects">
-      <h2 className="cp-main-heading zen-dots-regular">Projects</h2>
+      <h2 className="head">Projects</h2>
       <h3 className="cp-sub-heading">Selected Projects</h3>
 
       <div className="cp-projects-grid">

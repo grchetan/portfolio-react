@@ -1,0 +1,274 @@
+/* AchievementsSection.css
+   Match this to your existing theme: pastel, rounded, soft shadows.
+*/
+
+/* VARIABLES (tweak to match hero colors) */
+:root {
+  --accent-1: #a6e7ff;
+  --accent-2: #caa7ff;
+  --bg: #fbfdff;
+  --card-bg: #fff;
+  --muted: #6b6b6b;
+  --text: #0f1724;
+  --radius: 20px;
+  --shadow-sm: 0 8px 22px rgba(18, 24, 40, 0.06);
+  --shadow-lg: 0 28px 80px rgba(18, 24, 40, 0.12);
+}
+
+/* SECTION WRAPPER */
+.ach-section {
+  padding: 56px 6vw;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), var(--bg));
+}
+
+/* header */
+.ach-header {
+  margin-bottom: 20px;
+}
+.ach-title {
+  font-family: 'Permanent Marker', 'Poppins', system-ui;
+  font-size: 36px;
+  margin: 0 0 8px 0;
+}
+.ach-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* grid of achievement cards */
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* each card */
+.ach-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(10, 12, 20, 0.03);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 0.28s;
+}
+.ach-card:focus-within,
+.ach-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* info */
+.ach-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.ach-name {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+  color: var(--text);
+  font-weight: 700;
+}
+.ach-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 6px 0;
+}
+.ach-issuer {
+  font-size: 13px;
+  margin: 0;
+  color: #444;
+}
+
+/* actions */
+.ach-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.ach-btn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+}
+.ach-btn-primary {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041023;
+  box-shadow: 0 10px 26px rgba(166, 231, 255, 0.08);
+}
+.ach-btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* open in new tab link */
+.ach-link {
+  font-size: 12px;
+  color: #111;
+  opacity: 0.75;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+  padding-bottom: 2px;
+}
+
+/* -------------------- Modal styles -------------------- */
+.cert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 20, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 24px;
+  animation: overlayFade 0.18s ease;
+}
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* panel */
+.cert-panel {
+  width: min(980px, 96%);
+  max-height: 92vh;
+  overflow: auto;
+  background: linear-gradient(180deg, #fff, #fbfbff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(10, 12, 20, 0.04);
+  padding: 14px;
+  animation: panelPop 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes panelPop {
+  from {
+    transform: translateY(8px) scale(0.995);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* header inside modal */
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.04);
+  margin-bottom: 12px;
+}
+.cert-heading {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text);
+}
+.cert-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+.cert-close:focus {
+  outline: 3px solid rgba(166, 231, 255, 0.22);
+  outline-offset: 3px;
+}
+
+/* body: image + meta (responsive) */
+.cert-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* certificate image */
+.cert-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #f6f7fb;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 30px rgba(4, 8, 20, 0.06);
+}
+
+/* meta column */
+.cert-meta {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.cert-meta-line {
+  margin: 0;
+  color: #222;
+  font-size: 14px;
+}
+
+/* download + close inside modal */
+.cert-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.cert-download {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041023;
+  font-weight: 700;
+  text-decoration: none;
+}
+.cert-close.secondary {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+/* responsive modal layout */
+@media (max-width: 920px) {
+  .cert-body {
+    grid-template-columns: 1fr;
+  }
+  .cert-meta {
+    width: 100%;
+  }
+  .ach-actions {
+    align-items: flex-start;
+  }
+  .ach-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+/* small helpers */
+.ach-card:focus {
+  outline: 2px solid rgba(166, 231, 255, 0.12);
+  outline-offset: 4px;
+}
