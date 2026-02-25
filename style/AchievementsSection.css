@@ -272,3 +272,256 @@
   outline: 2px solid rgba(166, 231, 255, 0.12);
   outline-offset: 4px;
 }
+
+/* Frelance work css */
+
+/* FreelanceSection.css - matches your soft pastel rounded theme */
+:root {
+  --accent-1: #a6e7ff;
+  --accent-2: #caa7ff;
+  --bg: #fbfdff;
+  --card: #fff;
+  --text: #0f1724;
+  --muted: #6b6b6b;
+  --radius: 18px;
+  --shadow: 0 12px 30px rgba(10, 12, 20, 0.06);
+  --shadow-lg: 0 26px 70px rgba(10, 12, 20, 0.12);
+}
+
+.freelance-section {
+  padding: 56px 6vw;
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), var(--bg));
+}
+
+.freelance-header {
+  margin-bottom: 18px;
+}
+.freelance-title {
+  font-family: 'Permanent Marker', 'Poppins', sans-serif;
+  font-size: 34px;
+  margin: 0 0 6px 0;
+  color: var(--text);
+}
+.freelance-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.freelance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+/* card */
+.freelance-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(10, 12, 20, 0.03);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 0.28s;
+}
+.freelance-card:hover,
+.freelance-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.freelance-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.freelance-name {
+  font-size: 18px;
+  margin: 0 0 6px 0;
+  color: var(--text);
+  font-weight: 700;
+}
+.freelance-short {
+  margin: 0 0 10px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* meta row */
+.freelance-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.badge {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #041023;
+  box-shadow: 0 8px 18px rgba(166, 231, 255, 0.08);
+}
+.tech {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tech-pill {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #f6f7fb;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ctas */
+.freelance-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.btn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041023;
+  box-shadow: 0 8px 22px rgba(166, 231, 255, 0.08);
+}
+.link.repo,
+.link.live {
+  font-size: 13px;
+  color: #0f1724;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+/* Modal */
+.freelance-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 20, 0.45);
+  z-index: 1200;
+  padding: 20px;
+}
+.freelance-panel {
+  width: min(980px, 96%);
+  background: linear-gradient(180deg, #fff, #fbfbff);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+  border: 1px solid rgba(10, 12, 20, 0.04);
+}
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.04);
+}
+.panel-title {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text);
+}
+.panel-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.panel-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.panel-body {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* left content */
+.panel-desc {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.panel-tech {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* side column */
+.panel-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.panel-repo,
+.panel-live,
+.download-prop {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.panel-repo {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041023;
+}
+.panel-live {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--text);
+}
+.download-prop {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #041023;
+}
+
+/* Close secondary */
+.panel-close.secondary {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* responsive */
+@media (max-width: 920px) {
+  .panel-body {
+    grid-template-columns: 1fr;
+  }
+  .freelance-cta {
+    align-items: flex-start;
+  }
+  .freelance-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

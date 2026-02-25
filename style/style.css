@@ -42,7 +42,7 @@ body {
     Roboto,
     'Helvetica Neue',
     Arial;
-  background-color: var(--light-grey);
+
   color: var(--soft-black);
   overflow-x: hidden;
   line-height: 1.6;
@@ -451,7 +451,6 @@ ul {
   background: #bfdbfe;
   border-radius: 50%;
 }
-
 
 /* Skill section */
 

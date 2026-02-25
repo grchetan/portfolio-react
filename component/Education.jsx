@@ -31,7 +31,6 @@ export default function Education() {
                 </div>
                 <div className="year-text">2020 – 2021</div>
 
-                <div className="doodle card-d1">→</div>
                 <div className="doodle card-d2">⭐</div>
               </div>
             </div>
@@ -51,7 +50,6 @@ export default function Education() {
                 <div className="year-text">2021 – 2022</div>
 
                 <div className="doodle card-d3">💻</div>
-                <div className="doodle card-d4">◯</div>
               </div>
             </div>
 
@@ -69,7 +67,6 @@ export default function Education() {
                 </div>
                 <div className="year-text">2023 – 2024</div>
 
-                <div className="doodle card-d5">↗</div>
                 <div className="doodle card-d6">★</div>
               </div>
             </div>
@@ -94,7 +91,6 @@ export default function Education() {
 
                 <div className="current-badge">Current!</div>
 
-                <div className="doodle card-d7">🔒</div>
                 <div className="doodle card-d8">✓</div>
               </div>
             </div>
