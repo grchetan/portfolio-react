@@ -29,7 +29,7 @@ export default function AchievementsSection() {
   const closeBtnRef = useRef(null);
   const overlayRef = useRef(null);
 
-  // close on Esc
+ 
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'Escape') setOpenCert(null);
