@@ -149,7 +149,7 @@ export default function AchievementsSection() {
           ))}
         </div>
 
-        {/* Modal */}
+        {/* Modal use */}
         {openCert && (
           <div
             className="cert-overlay"
