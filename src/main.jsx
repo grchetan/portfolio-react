@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 
 // main file for 
+// pending work not done
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
