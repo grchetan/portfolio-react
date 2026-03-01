@@ -242,7 +242,7 @@ ul {
 /* image */
 .my-image {
   width: 400px;
-  max-width: 40%;
+  max-width: 90%;
   border-radius: 50% 50% 30px 30px;
   height: auto;
   object-fit: cover;
