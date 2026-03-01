@@ -483,6 +483,12 @@ ul {
   transform: rotate(var(--r, 0deg));
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-wrap: nowrap;
+  transition: all 0.3s ease;
+}
+
+.skill:hover {
+  background-color: #91dcf5;
+  transform: scale(1.1);
 }
 
 .skill img {
