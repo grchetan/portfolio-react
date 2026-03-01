@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Responsive Navbar with Hamburger</title>
+
+    <!-- fonts (kept same as your original) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Reenie+Beanie&family=Kalam:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ---------- your existing vars & core styles (kept) ---------- */
+      :root {
+        --deep-blue: #0f2027;
+        --blue-gradient: linear-gradient(
+          135deg,
+          #0f2027 0%,
+          #203a43 50%,
+          #2c5364 100%
+        );
+        --laptop--head: 44px;
+        --accent-blue: #2c5364;
+        --white: #ffffff;
+        --light-grey: #f3f4f6;
+        --soft-black: #1a1a1a;
+        --text-grey: #4b5563;
+        --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        --box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.04);
+        --hover-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        --border-radius: 24px;
+        --laptop-font-size: 18px;
+        --font-kalam: 'Reenie Beanie';
+        --pencil: #2f2f2f;
+        --half-border: 8px 10px 0 rgba(85, 46, 194, 0.274);
+        --pastel-1: #ffb3c6;
+        --pastel-2: #bfe9ff;
+        --pastel-3: #fff0b8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          'Patrick Hand',
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial;
+        color: var(--soft-black);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(180deg, #fbfdff 0%, #f7fbff 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* ---------- NAVBAR (desktop) ---------- */
+      .navbar-container {
+        max-width: 1200px;
+        margin: 1rem auto;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .navbar {
+        background-color: var(--white);
+        padding: 12px 20px;
+        border-radius: 50px;
+        box-shadow: var(--box-shadow);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-right: auto;
+      }
+      .logo h2 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.1rem;
+        margin: 0;
+      }
+
+      .nav-link {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        margin-left: 1rem;
+      }
+      .nav-link li a {
+        display: inline-block;
+        padding: 0.35rem 0.6rem;
+        border-radius: 8px;
+        font-size: var(--laptop-font-size);
+        transition: all 0.2s ease;
+      }
+      .nav-link li a:hover {
+        transform: scale(1.05);
+        text-decoration: overline;
+      }
+
+      .talk-button {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 14px;
+        background: linear-gradient(90deg, var(--pastel-1), var(--pastel-2));
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        font-family: 'Kalam', cursive;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+      }
+      .talk-button:hover {
+        transform: rotate(6deg);
+      }
+
+      /* ---------- HAMBURGER BUTTON (mobile) ---------- */
+      .hamburger {
+        display: none; /* show only on small screens via media query */
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        display: inline-grid;
+        place-items: center;
+        cursor: pointer;
+        position: relative;
+      }
+      .hamburger .icon {
+        width: 22px;
+        height: 2px;
+        background: var(--soft-black);
+        display: block;
+        position: relative;
+        transition: transform 0.25s ease;
+      }
+      .hamburger .icon::before,
+      .hamburger .icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--soft-black);
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+      }
+      .hamburger .icon::before {
+        top: -7px;
+      }
+      .hamburger .icon::after {
+        top: 7px;
+      }
+
+      /* when open, animate to X */
+      .hamburger[aria-expanded='true'] .icon {
+        transform: rotate(45deg);
+      }
+      .hamburger[aria-expanded='true'] .icon::before {
+        transform: rotate(90deg) translateX(0);
+        opacity: 0;
+      }
+      .hamburger[aria-expanded='true'] .icon::after {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+
+      /* ---------- MOBILE NAV (slide panel) ---------- */
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 320px;
+        max-width: 86%;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: -12px 0 30px rgba(0, 0, 0, 0.12);
+        transform: translateX(110%);
+        transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.2, 1);
+        z-index: 9999;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow-y: auto;
+      }
+      .mobile-nav.open {
+        transform: translateX(0);
+      }
+      .mobile-nav header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .mobile-nav .close-btn {
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .mobile-nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+      .mobile-nav ul li a {
+        display: block;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        font-size: 1.05rem;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+      }
+      .mobile-nav .cta {
+        margin-top: 1rem;
+      }
+
+      /* overlay to dim background when mobile menu open */
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
+        z-index: 999;
+      }
+      .mobile-overlay.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ---------- responsive adjustments ---------- */
+      @media (max-width: 768px) {
+        .nav-link {
+          display: none;
+        } /* hide desktop links */
+        .talk-button {
+          display: none;
+        } /* hide CTA or move inside mobile menu */
+        .hamburger {
+          display: inline-grid;
+        } /* show hamburger */
+        .navbar {
+          padding: 10px 12px;
+          gap: 0.6rem;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .mobile-nav,
+        .mobile-overlay {
+          display: none;
+        }
+      }
+
+      /* ---------- small polish ---------- */
+      @media (max-width: 420px) {
+        .mobile-nav {
+          width: 92%;
+        }
+        .hamburger {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      /* (Optional) keep some hero styles so paste into your existing style file easily */
+      .home-info-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      .home-info {
+        width: min(1100px, 95%);
+        padding: 1.5rem;
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="navbar-container">
+      <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo">
+          <img
+            src="https://via.placeholder.com/40"
+            alt="logo"
+            style="
+              width: 40px;
+              height: 40px;
+              border-radius: 8px;
+              object-fit: cover;
+            "
+          />
+          <h2>Chetan</h2>
+        </div>
+
+        <!-- desktop links -->
+        <ul class="nav-link" role="menubar" aria-label="Primary">
+          <li role="none"><a role="menuitem" href="#home">Home</a></li>
+          <li role="none"><a role="menuitem" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" href="#skills">Skills</a></li>
+          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+          <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- call to action (desktop) -->
+        <a class="talk-button" href="#contact">Let's Talk</a>
+
+        <!-- hamburger for mobile -->
+        <button
+          class="hamburger"
+          aria-label="Open menu"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+          id="hamburgerBtn"
+        >
+          <span class="icon" aria-hidden="true"></span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- MOBILE SLIDE PANEL (hidden on desktop) -->
+    <div
+      id="mobileNav"
+      class="mobile-nav"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <header>
+        <div style="display: flex; align-items: center; gap: 0.75rem">
+          <img
+            src="https://via.placeholder.com/36"
+            alt="logo small"
+            style="
+              width: 36px;
+              height: 36px;
+              border-radius: 8px;
+              object-fit: cover;
+            "
+          />
+          <strong>Chetan</strong>
+        </div>
+        <button class="close-btn" id="mobileClose" aria-label="Close menu">
+          &times;
+        </button>
+      </header>
+
+      <nav>
+        <ul>
+          <li><a href="#home" class="mobile-link">Home</a></li>
+          <li><a href="#about" class="mobile-link">About</a></li>
+          <li><a href="#skills" class="mobile-link">Skills</a></li>
+          <li><a href="#projects" class="mobile-link">Projects</a></li>
+          <li><a href="#contact" class="mobile-link">Contact</a></li>
+        </ul>
+
+        <div class="cta">
+          <a class="talk-button" href="#contact" style="display: inline-block"
+            >Let's Talk</a
+          >
+        </div>
+      </nav>
+    </div>
+
+    <!-- overlay -->
+    <div
+      id="mobileOverlay"
+      class="mobile-overlay"
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <!-- A small hero to show page -->
+    <main>
+      <section id="home" class="home-info-container">
+        <div class="home-info">
+          <div style="flex: 1">
+            <p style="font-weight: 700">Hi, I'm</p>
+            <h1 style="margin: 0.5rem 0">Chetan — Full Stack Dev</h1>
+            <p>Responsive navbar with hamburger (click ≡ on small screens).</p>
+          </div>
+          <div style="width: 260px">
+            <img
+              src="https://via.placeholder.com/260x260"
+              alt="profile"
+              style="width: 100%; border-radius: 12px; object-fit: cover"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // JS for hamburger toggle and accessibility improvements
+      (function () {
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMenu() {
+          hamburger.setAttribute('aria-expanded', 'true');
+          mobileNav.classList.add('open');
+          mobileNav.setAttribute('aria-hidden', 'false');
+          mobileOverlay.classList.add('visible');
+          document.body.style.overflow = 'hidden'; // lock scroll
+          // set focus to close button for keyboard users
+          mobileClose.focus();
+        }
+
+        function closeMenu() {
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileNav.classList.remove('open');
+          mobileNav.setAttribute('aria-hidden', 'true');
+          mobileOverlay.classList.remove('visible');
+          document.body.style.overflow = ''; // restore scroll
+          // return focus to hamburger
+          hamburger.focus();
+        }
+
+        hamburger.addEventListener('click', function (e) {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          if (!expanded) openMenu();
+          else closeMenu();
+        });
+
+        mobileClose.addEventListener('click', closeMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
+
+        // close when a mobile link is clicked
+        mobileLinks.forEach((link) => {
+          link.addEventListener('click', function () {
+            closeMenu();
+          });
+        });
+
+        // close on escape key
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+            if (expanded) closeMenu();
+          }
+        });
+
+        // Optional: close menu if window is resized above breakpoint
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 768) {
+            // ensure mobile menu is closed if open
+            if (hamburger.getAttribute('aria-expanded') === 'true') {
+              closeMenu();
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

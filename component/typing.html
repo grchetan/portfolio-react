@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,9 @@
       body {
         background: #f5f5f5;
         color: #333;
-        transition: background 0.3s, color 0.3s;
+        transition:
+          background 0.3s,
+          color 0.3s;
       }
 
       /* Sticky top bar */
@@ -139,14 +141,14 @@
     </main>
 
     <script>
-      const editor = document.getElementById("editor");
-      const wordCountEl = document.getElementById("wordCount");
-      const charCountEl = document.getElementById("charCount");
-      const charNoSpaceEl = document.getElementById("charNoSpace");
-      const wordList = document.getElementById("wordList");
-      const darkModeBtn = document.getElementById("darkModeBtn");
+      const editor = document.getElementById('editor');
+      const wordCountEl = document.getElementById('wordCount');
+      const charCountEl = document.getElementById('charCount');
+      const charNoSpaceEl = document.getElementById('charNoSpace');
+      const wordList = document.getElementById('wordList');
+      const darkModeBtn = document.getElementById('darkModeBtn');
 
-      editor.addEventListener("input", updateStats);
+      editor.addEventListener('input', updateStats);
 
       // Update all counts live
       function updateStats() {
@@ -154,12 +156,12 @@
 
         // Character counts
         charCountEl.textContent = text.length;
-        charNoSpaceEl.textContent = text.replace(/\s/g, "").length;
+        charNoSpaceEl.textContent = text.replace(/\s/g, '').length;
 
         // Clean text (remove punctuation, extra spaces)
         const words = text
           .toLowerCase()
-          .replace(/[^\w\s]/g, "")
+          .replace(/[^\w\s]/g, '')
           .trim()
           .split(/\s+/)
           .filter(Boolean);
@@ -175,14 +177,14 @@
 
         // Sort by highest count
         const sortedWords = Object.entries(frequency).sort(
-          (a, b) => b[1] - a[1]
+          (a, b) => b[1] - a[1],
         );
 
         // Display
-        wordList.innerHTML = "";
+        wordList.innerHTML = '';
         sortedWords.forEach(([word, count]) => {
           if (count > 1) {
-            const li = document.createElement("li");
+            const li = document.createElement('li');
             li.innerHTML = `<span>${word}</span><strong>${count}</strong>`;
             wordList.appendChild(li);
           }
@@ -191,29 +193,29 @@
 
       // Extra features
       function clearText() {
-        editor.value = "";
+        editor.value = '';
         updateStats();
       }
 
       function copyText() {
         navigator.clipboard.writeText(editor.value);
-        alert("Text copied!");
+        alert('Text copied!');
       }
 
       function downloadText() {
-        const blob = new Blob([editor.value], { type: "text/plain" });
-        const link = document.createElement("a");
+        const blob = new Blob([editor.value], { type: 'text/plain' });
+        const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = "notepad-text.txt";
+        link.download = 'notepad-text.txt';
         link.click();
       }
 
       // Dark mode toggle
-      darkModeBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
-        darkModeBtn.textContent = document.body.classList.contains("dark")
-          ? "☀️"
-          : "🌙";
+      darkModeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        darkModeBtn.textContent = document.body.classList.contains('dark')
+          ? '☀️'
+          : '🌙';
       });
     </script>
   </body>
