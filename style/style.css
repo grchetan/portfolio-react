@@ -27,6 +27,7 @@
   --pastel-3: #fff0b8;
 }
 
+/* ---------- base reset ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -42,10 +43,11 @@ body {
     Roboto,
     'Helvetica Neue',
     Arial;
-
   color: var(--soft-black);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- BACKGROUND SHAPES --- */
@@ -74,6 +76,7 @@ body {
   animation: morph 12s infinite reverse;
 }
 
+/* typography heads */
 h1,
 h2,
 h3,
@@ -96,12 +99,14 @@ ul {
   list-style: none;
 }
 
+/* ---------- NAV ---------- */
 .navbar-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin: 1rem;
   padding: 1rem;
+  gap: 1rem;
 }
 
 .navbar {
@@ -109,7 +114,12 @@ ul {
   padding: 16px 40px;
   border-radius: 50px;
   box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
+
+/* nav links */
 .nav-link {
   display: flex;
   gap: 18px;
@@ -119,6 +129,7 @@ ul {
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: rgba(0, 0, 0, 0.189);
   backdrop-filter: blur(12px);
+  align-items: center;
 }
 
 .nav-link li a {
@@ -141,6 +152,7 @@ ul {
   text-decoration: overline;
 }
 
+/* CTA */
 .talk-button {
   display: inline-block;
   padding: 10px 14px;
@@ -156,6 +168,7 @@ ul {
   transform: rotate(12deg);
 }
 
+/* arrow drawing */
 .draw-arrow {
   position: absolute;
   width: 220px;
@@ -186,6 +199,7 @@ ul {
   }
 }
 
+/* ---------- HERO / HOME ---------- */
 .home-info-container {
   display: flex;
   justify-content: center;
@@ -196,14 +210,17 @@ ul {
   justify-content: space-around;
   box-shadow: var(--card-shadow);
   margin-top: 4rem;
-  width: 1200px;
+  width: min(1200px, 95%);
   height: 500px;
   border-radius: 40px;
   background-color: var(--white);
   box-shadow: var(--half-border);
   border: 1px dashed rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+  gap: 2rem;
 }
 
+/* hero role */
 .hero-role {
   display: flex;
   text-align: center;
@@ -222,21 +239,26 @@ ul {
   color: var(--pencil);
 }
 
+/* image */
 .my-image {
   width: 400px;
+  max-width: 40%;
   border-radius: 50% 50% 30px 30px;
+  height: auto;
+  object-fit: cover;
 }
 
+/* hero name and fluid typography */
 .hero-name > p {
   letter-spacing: 1px;
   font-weight: 900;
   font-size: 26px;
   font-family: 'Reenie Beanie';
 }
-/*  */
+/* use clamp for fluid font-size */
 .hero-name > h1 {
   margin: 18px 0;
-  font-size: 80px;
+  font-size: clamp(32px, 8vw, 80px);
   text-wrap: wrap;
   letter-spacing: 5px;
   font-family:
@@ -249,9 +271,10 @@ ul {
     Arial;
 }
 
+/* buttons in hero */
 .home-button .hire {
   padding: 12px;
-  border: 1px solid#0f2027;
+  border: 1px solid #0f2027;
   margin-top: 20px;
   display: inline-block;
   margin-right: 20px;
@@ -267,7 +290,7 @@ ul {
 
 .home-button .resume {
   padding: 12px;
-  border: 1px solid#0f2027;
+  border: 1px solid #0f2027;
   display: inline-block;
   border-radius: 18px;
   font-family: 'Syne', sans-serif;
@@ -282,6 +305,8 @@ ul {
   box-shadow: var(--hover-shadow);
   background-color: var(--pastel-1);
 }
+
+/* vertical decorative text */
 .vertical-text {
   position: absolute;
   right: 4%;
@@ -298,9 +323,11 @@ ul {
   z-index: 1;
 }
 
+/* image side container for absolute things */
 .image-side {
   position: relative;
 }
+
 /* Animated Smiley Sticker */
 .sticker {
   position: absolute;
@@ -319,6 +346,7 @@ ul {
   }
 }
 
+/* ---------- ABOUT ---------- */
 .about {
   margin-top: 4rem;
   display: flex;
@@ -395,6 +423,7 @@ ul {
   }
 }
 
+/* ---------- IMAGE BOX ---------- */
 .wrapper {
   position: relative;
   width: 500px;
@@ -452,7 +481,7 @@ ul {
   border-radius: 50%;
 }
 
-/* Skill section */
+/* ---------- SKILLS ---------- */
 
 .skills-container {
   background-color: white;
@@ -493,4 +522,234 @@ ul {
 
 .skill img {
   width: 40px;
+}
+
+/* ---------- small improvements for accessibility & responsiveness ---------- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* smooth transitions for layout changes */
+.home-info,
+.about-info,
+.navbar,
+.skills-list {
+  transition: all 0.35s ease;
+}
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+
+/* Large tablets / small desktops */
+@media (max-width: 1024px) {
+  .home-info {
+    padding: 1.5rem;
+    gap: 1.25rem;
+    height: auto;
+  }
+
+  .my-image {
+    max-width: 45%;
+  }
+
+  .navbar {
+    padding: 12px 28px;
+  }
+
+  .hero-name > h1 {
+    letter-spacing: 3px;
+  }
+
+  .vertical-text {
+    font-size: 4rem;
+    right: 2%;
+  }
+}
+
+/* Tablets and larger phones */
+@media (max-width: 768px) {
+  /* stack hero content vertically for narrow screens */
+  .home-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 2rem;
+  }
+
+  /* make image smaller and responsive */
+  .my-image {
+    width: min(320px, 70%);
+    max-width: 70%;
+    border-radius: 40px;
+  }
+
+  /* center and reduce nav transform (mobile friendly) */
+  .nav-link {
+    transform: none;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 6px 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .navbar {
+    padding: 10px 16px;
+    border-radius: 18px;
+  }
+
+  .nav-link li a {
+    font-size: 16px;
+  }
+
+  /* scale down big hero headline */
+  .hero-name > h1 {
+    font-size: clamp(28px, 10vw, 56px);
+    letter-spacing: 3px;
+  }
+
+  .hero-name > p {
+    font-size: 20px;
+  }
+
+  .draw-arrow {
+    right: 10px;
+    top: 70px;
+    width: 160px;
+    height: 70px;
+  }
+
+  /* move vertical text more inward and slightly smaller */
+  .vertical-text {
+    display: none; /* save space on tablets */
+  }
+
+  /* sticker less obtrusive */
+  .sticker {
+    width: 70px;
+    height: 70px;
+    left: auto;
+    right: 8%;
+    top: 2%;
+  }
+
+  /* About section stacks */
+  .about-info {
+    flex-direction: column;
+    gap: 1.75rem;
+    padding: 1rem 0;
+  }
+
+  .about-box {
+    width: 100%;
+  }
+
+  .about-box img {
+    width: min(300px, 80%);
+  }
+
+  .image-box {
+    transform: none;
+    padding: 12px;
+  }
+
+  .wrapper {
+    width: min(420px, 95%);
+  }
+}
+
+/* Mobile small phones */
+@media (max-width: 480px) {
+  /* hero */
+  .home-info {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .hero-name > h1 {
+    font-size: clamp(24px, 12vw, 42px);
+    letter-spacing: 2px;
+  }
+
+  .hero-name > p {
+    font-size: 18px;
+  }
+
+  /* simplify nav for tiny screens */
+  .navbar-container {
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .navbar {
+    padding: 10px 12px;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .nav-link {
+    gap: 8px;
+    font-size: 14px;
+    transform: none;
+  }
+
+  .talk-button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* hide decorative / heavy elements to improve performance and readability */
+  .vertical-text,
+  .draw-arrow,
+  .blob-1,
+  .blob-2,
+  .sticker,
+  .about-blob,
+  .about-img-blob {
+    display: none;
+  }
+
+  .my-image {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .image-box img {
+    height: auto;
+  }
+
+  .skills-container {
+    padding: 4rem 1rem;
+  }
+
+  .skills-list {
+    gap: 12px;
+  }
+
+  /* about text spacing tighter */
+  .about-info p {
+    line-height: 1.4;
+    font-size: 18px;
+    padding: 1.2rem 0;
+  }
+}
+
+/* optional tiny improvement: reduce motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .draw-arrow path,
+  .sticker,
+  .blob-1,
+  .blob-2,
+  .about-blob,
+  .about-img-blob {
+    animation: none !important;
+    transition: none !important;
+  }
 }
