@@ -198,7 +198,91 @@ ul {
     stroke-dashoffset: 0;
   }
 }
+/* =====================Humber navbar css  code========== */
+/* ========================= */
+/* HAMBURGER STYLE */
+/* ========================= */
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--soft-black);
+  transition: 0.3s ease;
+  border-radius: 3px;
+}
+
+/* Animation when active */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========================= */
+/* MOBILE MENU */
+/* ========================= */
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background: white;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+
+.mobile-menu a {
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--soft-black);
+}
+
+.mobile-menu.show {
+  right: 0;
+}
+
+/* ========================= */
+/* RESPONSIVE BEHAVIOR */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .nav-link {
+    display: none;
+  }
+
+  .talk-button {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .draw-arrow {
+    display: none;
+  }
+}
 /* ---------- HERO / HOME ---------- */
 .home-info-container {
   display: flex;

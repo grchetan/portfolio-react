@@ -1,4 +1,5 @@
 // import { Link } from "react-router-dom";
+import { useState } from "react";
 import '../style/style.css';
 import '../style/responsive.css';
 import photo from '../src/assets/photo.png';
@@ -15,6 +16,7 @@ import express_logo from '../src/assets/logos/express-js.png';
 import github_logo from '../src/assets/logos/github-logo.png';
 
 function Home() {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="home-container">
@@ -24,6 +26,8 @@ function Home() {
           <div className="logo">
             <h2>CHETAN PRAJAPAT</h2>
           </div>
+
+          {/* Desktop Navbar */}
           <div className="navbar">
             <nav>
               <ul className="nav-link">
@@ -44,16 +48,39 @@ function Home() {
           </div>
 
           <div className="talk-button">
-            <a href="">let's Talk</a>
+            <a href="#Contact">let's Talk</a>
           </div>
 
-          <svg class="draw-arrow" viewBox="0 0 200 80">
-            {/* <!-- Pencil-drawn curved arrow --> */}
-            <path d="M0 120 C80 10, 120 1, 180 40" fill="none" />
+          {/* Hamburger Button */}
+          <div
+            className={`hamburger ${open ? 'active' : ''}`}
+            onClick={() => setOpen(!open)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
 
-            {/* <!-- Arrow head --> */}
+          <svg className="draw-arrow" viewBox="0 0 200 80">
+            <path d="M0 120 C80 10, 120 1, 180 40" fill="none" />
             <path d="M180 35 L190 40 L180 45" fill="none" />
           </svg>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`mobile-menu ${open ? 'show' : ''}`}>
+          <a href="#Home" onClick={() => setOpen(false)}>
+            Home
+          </a>
+          <a href="#About" onClick={() => setOpen(false)}>
+            About
+          </a>
+          <a href="#Project" onClick={() => setOpen(false)}>
+            Project
+          </a>
+          <a href="#Contact" onClick={() => setOpen(false)}>
+            Contact
+          </a>
         </div>
 
         <div className="home-info-container">
