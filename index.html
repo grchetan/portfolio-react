@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -44,7 +44,7 @@
         width: 100%;
         height: 100vh; /* h-screen */
         pointer-events: none; /* pointer-events-none */
-        z-index: 50; /* z-50 */
+        z-index: 50; 
       }
     </style>
   </head>
@@ -191,9 +191,9 @@
       function render() {
         if (!ctx || ctx.running === false) return;
 
-        ctx.globalCompositeOperation = "source-over";
+        ctx.globalCompositeOperation = 'source-over';
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.globalCompositeOperation = "lighter";
+        ctx.globalCompositeOperation = 'lighter';
 
         try {
           const hue = Math.round(f.update());
@@ -209,26 +209,26 @@
           ctx.frame++;
           window.requestAnimationFrame(render);
         } catch (error) {
-          console.error("Error in render loop:", error);
+          console.error('Error in render loop:', error);
           ctx.running = false;
         }
       }
 
       function resizeCanvas() {
-        const canvas = document.getElementById("canvas");
+        const canvas = document.getElementById('canvas');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
 
       function onMousemove(e) {
-        document.removeEventListener("mousemove", onMousemove);
-        document.removeEventListener("touchstart", onMousemove);
+        document.removeEventListener('mousemove', onMousemove);
+        document.removeEventListener('touchstart', onMousemove);
 
-        document.addEventListener("mousemove", handlePointerMove);
-        document.addEventListener("touchmove", handlePointerMove, {
+        document.addEventListener('mousemove', handlePointerMove);
+        document.addEventListener('touchmove', handlePointerMove, {
           passive: true,
         });
-        document.addEventListener("touchstart", handleTouchStart);
+        document.addEventListener('touchstart', handleTouchStart);
 
         handlePointerMove(e);
         createLines();
@@ -236,10 +236,10 @@
       }
 
       function initCanvas() {
-        const canvas = document.getElementById("canvas");
+        const canvas = document.getElementById('canvas');
         if (!canvas) return;
 
-        ctx = canvas.getContext("2d");
+        ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         ctx.running = true;
@@ -252,18 +252,18 @@
           offset: 285,
         });
 
-        document.addEventListener("mousemove", onMousemove);
-        document.addEventListener("touchstart", onMousemove);
-        window.addEventListener("resize", resizeCanvas);
+        document.addEventListener('mousemove', onMousemove);
+        document.addEventListener('touchstart', onMousemove);
+        window.addEventListener('resize', resizeCanvas);
 
-        window.addEventListener("focus", () => {
+        window.addEventListener('focus', () => {
           if (ctx && ctx.running === false) {
             ctx.running = true;
             render();
           }
         });
 
-        window.addEventListener("blur", () => {
+        window.addEventListener('blur', () => {
           if (ctx) ctx.running = true; // Original sets to true, possibly a bug; consider setting to false
         });
 
@@ -278,7 +278,7 @@
         render();
       }
 
-      document.addEventListener("DOMContentLoaded", initCanvas);
+      document.addEventListener('DOMContentLoaded', initCanvas);
     </script>
   </body>
 </html>
